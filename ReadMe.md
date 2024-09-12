@@ -1,0 +1,65 @@
+# This pathway depicts a general framework for a Hybrid AI System, showing an approach that doesn't require building from scratch. 
+# Note: That this is a basic implementation; for more advanced applications, further study and exploration of compatible technologies are needed.
+
+1. Application Level
+   └── Sends user query to the platform
+
+2. Basic Model API
+   └── Model generates a response to the query.
+       └── Model API: Can use third-party APIs (OpenAI, Google, Anthropic) or self-hosted APIs.
+
+3. Enhanced Context
+   ├── Context input enhancement for better responses
+   │   ├── Gathers external data sources to improve model performance.
+   │   └── Example: Retrieval-Augmented Generation (RAG)
+   │       ├── Retriever: Fetches external data relevant to the query.
+   │       └── Generator: Uses the data to generate more accurate responses.
+   │
+   ├── Types of Retrieval in RAG:
+   │   ├── Term-based Retrieval
+   │   │   ├── Keyword searches (BM25, Elasticsearch).
+   │   │   └── Retrieves documents containing terms matching the query.
+   │   └── Embedding-based Retrieval
+   │       ├── Converts text to embedding vectors.
+   │       └── Retrieves data by calculating vector similarity.
+   │
+   └── Example Advanced RAGs:
+       ├── RAG with Tabular Data
+       │   ├── Text-to-SQL: Transforms queries into SQL.
+       │   └── SQL Execution: Runs SQL and generates responses.
+       └── Agentic RAGs: Web searches or API queries augment model context.
+
+4. Guardrails
+   ├── Input Guardrails: Protect the platform from bad inputs.
+   │   ├── Avoid leaking sensitive data to external APIs.
+   │   └── Prevent model jailbreaking (e.g., executing malicious prompts).
+   │
+   └── Output Guardrails: Ensure high-quality responses.
+       ├── Detects empty, toxic, or factually inconsistent responses.
+       ├── Validates response formats (e.g., JSON, regex).
+       └── Policies for retrying failed responses (e.g., incomplete outputs).
+
+5. Model Router and Gateway
+   ├── Model Router: Routes queries to the right model.
+   │   ├── Uses intent classifiers to determine user intent.
+   │   └── Directs queries to different models based on their complexity (e.g., technical, simple queries).
+   │
+   └── Model Gateway: Intermediate layer managing model access.
+       ├── Centralizes model API access and implements access control.
+       ├── Handles API changes in one place, simplifying updates.
+       └── Includes fallback policies for API failures (e.g., rate-limited or unavailable services).
+
+6. Caching
+   ├── Prompt Cache: Reuses shared segments in prompts (e.g., system prompts).
+   │   └── Reduces repetitive processing and speeds up responses.
+   │
+   ├── Exact Cache: Stores exact query-response pairs for reuse.
+   │   └── Efficient for repeated, exact queries or long documents.
+   │
+   └── Semantic Cache: Reuses similar but non-identical queries.
+       └── Embedding-based similarity determines query reuse.
+
+7. Observability and Orchestration
+   ├── Observability: Monitors system behavior (logs, traces, metrics).
+   └── Orchestration: Chains components together to form the complete system (evaluation, retrieval, generation).
+
