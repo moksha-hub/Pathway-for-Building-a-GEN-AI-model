@@ -63,3 +63,10 @@
    ├── Observability: Monitors system behavior (logs, traces, metrics).
    └── Orchestration: Chains components together to form the complete system (evaluation, retrieval, generation).
 
+
+##  Tokens ##
+#For everymodel for both providing input and output needs tokens.
+#this tokens are limited per process for input and and output and for general models like Chatgpt, Claude and etc.
+#These tokens are nothing but characters or strings etc to be more concise those are alphabets, numbers and special characters.
+#Mainly these tokens also be calculated with space gaps too and these all are counted and for a normal API usage the company or model charge.
+
